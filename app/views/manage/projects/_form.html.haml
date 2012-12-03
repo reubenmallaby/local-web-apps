@@ -1,0 +1,29 @@
+= render :partial => "manage/manage/errors", :locals => { :obj => @project }
+
+= form_for [:manage, @project], :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field input-xxlarge'
+  .control-group
+    = f.label :description, :class => 'control-label'
+    .controls
+      = f.text_area :description, :rows => 10, :class => 'text_area input-xxlarge'
+  .control-group
+    = f.label :url, :class => 'control-label'
+    .controls
+      = f.text_field :url, :class => 'text_field input-xxlarge'
+  .control-group
+    = f.label :school_year_id, :class => 'control-label'
+    .controls
+      = f.select :school_year_id, @years.map { |y| ["#{y.value}-#{semestre y.semestre}", y.id] }, :class => 'select input-xxlarge'
+  .control-group
+    = f.label :students, :class => 'control-label'
+    #students
+      = f.fields_for :user_projects do |b|
+        = render :partial => "add_student", :locals => { :f => b }
+        Hello
+    = link_to "Add student", manage_add_student_path, :remote => true, :method => :post, :id => "add_student", :class => "btn btn-primary offset3"
+  .form-actions
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), manage_projects_path, :class => 'btn'
+    = f.submit nil, :class => 'btn btn-primary'

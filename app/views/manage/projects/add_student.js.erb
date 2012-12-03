@@ -1,0 +1,10 @@
+$('#students').append("<%= escape_javascript(render(:partial => "add_student")) %>");
+
+$(function(){
+  $('.remove_row').click(function() {
+    var id = $(this).attr('id').split('_')[1];
+    $('#student_' + id).remove();
+    return false;
+  });
+});
+

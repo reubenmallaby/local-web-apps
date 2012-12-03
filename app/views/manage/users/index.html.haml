@@ -1,0 +1,37 @@
+.pull-right= link_to t('.new', :default => t("helpers.links.new")), new_manage_user_path, :class => 'btn btn-primary'
+.page-header
+  %h2 Users
+= will_paginate @users
+.clearfix
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th Admin
+      %th Active
+      %th Email
+      %th Projects
+      %th
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= link_to user.name, manage_user_path(user)
+        %td
+          %i{ :class => user.admin ? "icon-ok" : "icon-minus"} &nbsp;
+        %td
+          %i{ :class => user.active ? "icon-ok" : "icon-minus"} &nbsp;
+        %td= mail_to user.email, user.email, :class => "btn btn-link"
+        %td
+          %ul
+            - user.projects.each do |p|
+              %li= link_to "(#{p.school_year.value}) #{p.name}", p.url
+        %td.span2
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_manage_user_path(user), :class => 'btn btn-mini btn-primary span1'
+          %br
+          %br
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), manage_user_path(user), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger span1'
+
+.clearfix
+.pull-right= link_to t('.new', :default => t("helpers.links.new")), new_manage_user_path, :class => 'btn btn-primary'
+= will_paginate @users

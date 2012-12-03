@@ -1,0 +1,22 @@
+.pull-right= link_to t('.new', :default => t("helpers.links.new")), new_manage_school_year_path, :class => 'btn btn-primary'
+.page-header
+  %h2 Years
+.clearfix
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Value
+      %th Semestre
+      %th
+  %tbody
+    - @years.each do |year|
+      %tr
+        %td.span2= year.value
+        %td
+          = semestre_icon year.semestre
+          = semestre year.semestre, true
+        %td.span2= link_to t('.destroy', :default => t("helpers.links.destroy")), manage_school_year_path(year), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger span1'
+
+.clearfix
+.pull-right= link_to t('.new', :default => t("helpers.links.new")), new_manage_school_year_path, :class => 'btn btn-primary'

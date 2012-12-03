@@ -1,0 +1,23 @@
+%h2 Settings
+
+= form_for manage_settings_path, :html => { :class => "form-horizontal" } do |f|
+
+  .control-group
+    = f.label :site_title, :class => "control-label"
+    .controls= text_field_tag :site_title, Settings.site_title, :class => 'input-xlarge'
+
+  .control-group
+    = f.label :nginx_conf_path, :class => "control-label"
+    .controls= text_field_tag :nginx_conf_path, Settings.nginx_conf_path, :class => 'input-xlarge'
+
+  .control-group
+    = f.label :apache_conf_path, :class => "control-label"
+    .controls= text_field_tag :apache_conf_path, Settings.apache_conf_path, :class => 'input-xlarge'
+
+  .control-group
+    = f.label :www_path, :class => "control-label"
+    .controls= text_field_tag :www_path, Settings.www_path, :class => 'input-xlarge'
+
+  %br
+  .control-group
+    .controls= f.submit "Save settings", :class => "btn btn-large btn-primary"

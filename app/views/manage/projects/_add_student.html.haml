@@ -1,0 +1,4 @@
+.controls{ :id => "student_#{session[:count] }" }
+  = f.select "user_id", @users.map { |u| [u.name, u.id] }, :prompt => "Select student"
+  = link_to "Remove", "", :class => "icon icon-trash remove_row", :id => "remover_#{session[:count]}"
+%br
